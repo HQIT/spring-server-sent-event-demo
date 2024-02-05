@@ -2,9 +2,61 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>我的前端页面</title>
+    <title>SSE Demo</title>
 </head>
 <body>
     <h1>欢迎来到我的前端页面</h1>
+    <button id="sendButton1">发送消息1</button>
+    <span id="count1">0</span> 次<br>
+    <button id="sendButton2">发送消息2</button>
+    <span id="count2">0</span> 次
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const eventSource = new EventSource("/events");
+            eventSource.onmessage = function (event) {
+                const data = JSON.parse(event.data);
+                if (data.target === 'sendButton1') {
+                    const countElement = document.getElementById('count1');
+                    countElement.textContent = String(parseInt(countElement.textContent) + 1);
+                } else if (data.target === 'sendButton2') {
+                    const countElement = document.getElementById('count2');
+                    countElement.textContent = String(parseInt(countElement.textContent) + 1);
+                }
+            };
+            eventSource.onerror = function (error) {
+                console.error("EventSource failed:", error);
+                eventSource.close(); // 出错时关闭连接
+            };
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const sendButton1 = document.getElementById('sendButton1');
+            const sendButton2 = document.getElementById('sendButton2');
+
+            function sendMessage(messageText) {
+                fetch('/events', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({text: messageText}),
+                })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            }
+
+            sendButton1.addEventListener('click', function () {
+                sendMessage(sendButton1.id);
+            });
+            sendButton2.addEventListener('click', function () {
+                sendMessage(sendButton2.id);
+            });
+        });
+    </script>
+
 </body>
 </html>

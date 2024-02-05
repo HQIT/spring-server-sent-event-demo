@@ -8,14 +8,13 @@
         <version>3.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.cloume.maps</groupId>
-    <artifactId>spring-event-source-4-webclient-demo</artifactId>
+    <groupId>com.cloume.sse</groupId>
+    <artifactId>spring-server-sent-event-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-event-source-4-webclient-demo</name>
-    <description>spring-event-source-4-webclient-demo</description>
+    <name>spring-server-sent-event-demo</name>
+    <description>spring-server-sent-event-demo</description>
     <properties>
         <java.version>17</java.version>
-        <spring-boot-admin.version>3.2.1</spring-boot-admin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -26,19 +25,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -57,13 +43,6 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-dependencies</artifactId>
-                <version>${spring-boot-admin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
